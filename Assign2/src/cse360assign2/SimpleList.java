@@ -6,6 +6,8 @@
  */
 package cse360assign2;
 
+import java.util.Arrays;
+
 /**
  * This class simple List is used to operate and create an array.
  * The operations include add, remove, Count, toString, search
@@ -29,15 +31,17 @@ public class SimpleList {
 	 */
 	public void add(int put) {
 		
-		for(int i = count; i >= 0; i--) {
+		if (count == list.length) {	// if the count is equal to length of the
+			int size = list.length;	// make the the length larger
+			int nextLength = size + (size / 2);	// increase by 50%
+			list = Arrays.copyOf(list, nextLength);	// copy array into itself
+		}
+		for(int i = count; i >= 0; i--) {	// move elements to the end
 			list[i+1] = list[i];
 		}
-		list[0] = put;	
-		if (count == 10) {
-			
-		}else {
-			count++;
-		}
+		list[0] = put;	// add elements as before
+		
+		count++;		// increment count
 	}
 	/**
 	 * removes the integer given as an argument 
@@ -45,10 +49,13 @@ public class SimpleList {
 	 */
 	public void remove(int spot) {
 		if(search(spot) >= 0) {
-			for(int i = search(spot); i < 9; i++) {
+			for(int i = search(spot); i < list.length-1; i++) {	
 				list[i] = list[i + 1];
 			}
 			count--;
+		}
+		if(count < (list.length/4)) {	// check if list has 25% empty space
+			list = Arrays.copyOf(list, (list.length/4)); // decrease size
 		}
 	}
 	/**
