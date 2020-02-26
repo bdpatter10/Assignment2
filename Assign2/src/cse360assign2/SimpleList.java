@@ -44,6 +44,20 @@ public class SimpleList {
 		count++;		// increment count
 	}
 	/**
+	 * appends an element to the end of the array, 
+	 * and increments count
+	 * @param put the integer that is to be put into the array
+	 */
+	public void append(int last) {
+		if (count == list.length) {	// if the count is equal to length of the
+			int size = list.length;	// make the the length larger
+			int nextLength = size + (size / 2);	// increase by 50%
+			list = Arrays.copyOf(list, nextLength);	// copy array into itself
+		}
+		list[count] = last;
+		count++;
+	}
+	/**
 	 * removes the integer given as an argument 
 	 * @param spot the integer that will be removed from the array
 	 */
@@ -66,6 +80,14 @@ public class SimpleList {
 		return count;
 	}
 	/**
+	 * this returns the size of the array
+	 * @return size 
+	 */
+	public int size() {
+		int size = list.length - 1;
+		return size;
+	}
+	/**
 	 * converts the integers in the array into a string
 	 * @return numList
 	 */
@@ -75,6 +97,13 @@ public class SimpleList {
 			numList = numList + list[i-1];
 		}
 		return numList;
+	}
+	/**
+	 * returns the first element in the list
+	 * @return list[0]
+	 */
+	public int first() {
+		return list[0];
 	}
 	/**
 	 * looks through the array of integers and finds the desired integer
